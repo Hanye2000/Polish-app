@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Polish Practice App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Nunito', sans-serif;
+      max-width: 700px;
+      margin: 40px auto;
+      background: #f8f9fa;
+      color: #333;
+      padding: 20px;
+    }
+    h1, h2, h3 {
+      text-align: center;
+    }
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      margin-bottom: 30px;
+    }
+    .question {
+      margin-bottom: 20px;
+    }
+    input[type="text"], button {
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+    button {
+      background: #ffffff;
+      border: 1px solid #007bff;
+      color: #007bff;
+      cursor: pointer;
+      margin: 10px;
+    }
+    button:hover {
+      background-color: #007bff;
+      color: white;
+    }
+    .feedback {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+    .correct {
+      color: green;
+    }
+    .incorrect {
+      color: red;
+    }
+    .progress-container {
+      background: #ddd;
+      width: 100%;
+      height: 20px;
+      border-radius: 10px;
+      margin: 30px 0;
+      overflow: hidden;
+    }
+    .progress-bar {
+      background: linear-gradient(to right, #00c6ff, #0072ff);
+      height: 100%;
+      width: 0%;
+      transition: 0.5s;
+    }
+    .page {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    .start-button {
+      display: block;
+      margin: 20px auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="start" class="active">
+    <h1>🇵🇱 Polish Practice App</h1>
+    <p style="text-align: center;">Choose a category:</p>
+    <div style="text-align: center;">
+      <button onclick="showPage('translate')">📝 Translation</button>
+      <button onclick="showPage('past')">⏳ Past Tense</button>
+    </div>
+  </div>
+
+  <div id="translate" class="page">
+    <h2>Translate to Polish</h2>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressTranslate"></div>
+    </div>
+    <div class="card">
+      <div class="question">
+        <p>1. “I am eating an apple”</p>
+        <input type="text" id="q1"><button onclick="check(1, 'Translate')">Check</button>
+        <div id="f1" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p>2. “We are learning Polish”</p>
+        <input type="text" id="q2"><button onclick="check(2, 'Translate')">Check</button>
+        <div id="f2" class="feedback"></div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button onclick="showPage('start')">← Back</button>
+    </div>
+  </div>
+
+  <div id="past" class="page">
+    <h2>Past Tense</h2>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressPast"></div>
+    </div>
+    <div class="card">
+      <div class="question">
+        <p>1. Masculine past tense of <strong>czytać</strong> (I):</p>
+        <input type="text" id="q3"><button onclick="check(3, 'Past')">Check</button>
+        <div id="f3" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p>2. Feminine past tense of <strong>pić</strong> (You, singular):</p>
+        <input type="text" id="q4"><button onclick="check(4, 'Past')">Check</button>
+        <div id="f4" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p>3. Neuter past tense of <strong>mieć</strong> (It):</p>
+        <input type="text" id="q5"><button onclick="check(5, 'Past')">Check</button>
+        <div id="f5" class="feedback"></div>
+      </div>
+    </div>
+    <div style="text-align:center">
+      <button onclick="showPage('start')">← Back</button>
+    </div>
+  </div>
+
+  <script>
+    const correctAnswers = {
+      1: ["jem jabłko", "ja jem jabłko"],
+      2: ["uczymy się polskiego", "my uczymy się polskiego"],
+      3: ["czytałem", "przeczytałem"],
+      4: ["piłaś", "wypiłaś"],
+      5: ["miało"]
+    };
+
+    const scores = {
+      Translate: 0,
+      Past: 0
+    };
+
+    const answered = {
+      Translate: {},
+      Past: {}
+    };
+
+    function check(num, category) {
+      const input = document.getElementById("q" + num).value.trim().toLowerCase();
+      const feedback = document.getElementById("f" + num);
+      const answers = correctAnswers[num];
+
+      if (answers.includes(input)) {
+        feedback.textContent = "✅ Correct!";
+        feedback.className = "feedback correct";
+        if (!answered[category][num]) {
+          scores[category] += 100 / Object.keys(correctAnswers).filter(id => isInCategory(parseInt(id), category)).length;
+          answered[category][num] = true;
+        }
+      } else {
+        feedback.textContent = "❌ Try again.";
+        feedback.className = "feedback incorrect";
+      }
+      updateProgress(category);
+    }
+
+    function updateProgress(category) {
+      const bar = document.getElementById("progress" + category);
+      bar.style.width = scores[category] + "%";
+    }
+
+    function isInCategory(id, category) {
+      if (category === 'Translate') return [1, 2].includes(id);
+      if (category === 'Past') return [3, 4, 5].includes(id);
+      return false;
+    }
+
+    function showPage(id) {
+      document.querySelectorAll('.page, #start').forEach(p => p.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+  </script>
+</body>
+</html>
