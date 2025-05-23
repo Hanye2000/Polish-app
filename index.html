@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Polish Practice App</title>
+  <title>Polish Grammar Practice</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
   <style>
     body {
@@ -86,13 +86,13 @@
     <h1>🇵🇱 Polish Practice App</h1>
     <p style="text-align: center;">Choose a category:</p>
     <div style="text-align: center;">
-      <button onclick="showPage('translate')">📝 Translation</button>
+      <button onclick="showPage('translate')">📝 Accusative Singular</button>
       <button onclick="showPage('past')">⏳ Past Tense</button>
     </div>
   </div>
 
   <div id="translate" class="page">
-    <h2>Translate to Polish</h2>
+    <h2>Progress</h2>
     <div class="progress-container">
       <div class="progress-bar" id="progressTranslate"></div>
     </div>
@@ -103,9 +103,14 @@
         <div id="f1" class="feedback"></div>
       </div>
       <div class="question">
-        <p>2. “We are learning Polish”</p>
+        <p>2. “He really likes Polish”</p>
         <input type="text" id="q2"><button onclick="check(2, 'Translate')">Check</button>
         <div id="f2" class="feedback"></div>
+      </div>
+    <div class="question">
+        <p>3. “Do you know Anna?”</p>
+        <input type="text" id="q3"><button onclick="check(2, 'Translate')">Check</button>
+        <div id="f3" class="feedback"></div>
       </div>
     </div>
     <div style="text-align:center">
@@ -121,18 +126,18 @@
     <div class="card">
       <div class="question">
         <p>1. Masculine past tense of <strong>czytać</strong> (I):</p>
-        <input type="text" id="q3"><button onclick="check(3, 'Past')">Check</button>
-        <div id="f3" class="feedback"></div>
-      </div>
-      <div class="question">
-        <p>2. Feminine past tense of <strong>pić</strong> (You, singular):</p>
-        <input type="text" id="q4"><button onclick="check(4, 'Past')">Check</button>
+        <input type="text" id="q4"><button onclick="check(3, 'Past')">Check</button>
         <div id="f4" class="feedback"></div>
       </div>
       <div class="question">
-        <p>3. Neuter past tense of <strong>mieć</strong> (It):</p>
-        <input type="text" id="q5"><button onclick="check(5, 'Past')">Check</button>
+        <p>2. Feminine past tense of <strong>pić</strong> (You, singular):</p>
+        <input type="text" id="q5"><button onclick="check(4, 'Past')">Check</button>
         <div id="f5" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p>3. Neuter past tense of <strong>mieć</strong> (It):</p>
+        <input type="text" id="q6"><button onclick="check(5, 'Past')">Check</button>
+        <div id="f6" class="feedback"></div>
       </div>
     </div>
     <div style="text-align:center">
@@ -143,10 +148,11 @@
   <script>
     const correctAnswers = {
       1: ["jem jabłko", "ja jem jabłko"],
-      2: ["uczymy się polskiego", "my uczymy się polskiego"],
-      3: ["czytałem", "przeczytałem"],
-      4: ["piłaś", "wypiłaś"],
-      5: ["miało"]
+      2: ["on bardzo lubi polski", "on bardzo lubi język polski", "on naprawdę lubi polski", "on naprawdę lubi język polski"],
+      3: ["Czy znasz Annę?", "Czy ty znasz Annę?", "Znasz Annę?", "Czy wy znacie Annę?", "Czy znacie Annę?"]      
+      4: ["czytałem", "przeczytałem"],
+      5: ["piłaś", "wypiłaś"],
+      6: ["miało"]
     };
 
     const scores = {
@@ -184,8 +190,8 @@
     }
 
     function isInCategory(id, category) {
-      if (category === 'Translate') return [1, 2].includes(id);
-      if (category === 'Past') return [3, 4, 5].includes(id);
+      if (category === 'Translate') return [1, 2, 3].includes(id);
+      if (category === 'Past') return [4, 5, 6].includes(id);
       return false;
     }
 
