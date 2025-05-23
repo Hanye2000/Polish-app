@@ -13,9 +13,11 @@
       color: #333;
       padding: 20px;
     }
+
     h1, h2, h3 {
       text-align: center;
     }
+
     .card {
       background: white;
       padding: 20px;
@@ -23,9 +25,11 @@
       box-shadow: 0 4px 10px rgba(0,0,0,0.1);
       margin-bottom: 30px;
     }
+
     .question {
       margin-bottom: 20px;
     }
+
     input[type="text"], button {
       padding: 10px;
       font-size: 1em;
@@ -34,27 +38,24 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.05);
       transition: 0.3s;
     }
+
     button {
-      background: #ffffff;
-      border: 1px solid #007bff;
-      color: #007bff;
       cursor: pointer;
-      margin: 10px;
     }
-    button:hover {
-      background-color: #007bff;
-      color: white;
-    }
+
     .feedback {
       font-weight: bold;
       margin-top: 10px;
     }
+
     .correct {
       color: green;
     }
+
     .incorrect {
       color: red;
     }
+
     .progress-container {
       background: #ddd;
       width: 100%;
@@ -63,36 +64,97 @@
       margin: 30px 0;
       overflow: hidden;
     }
+
     .progress-bar {
       background: linear-gradient(to right, #ff8264, #ff5931);
       height: 100%;
       width: 0%;
       transition: 0.5s;
     }
+
     .page {
       display: none;
     }
+
     .active {
       display: block;
     }
-    .start-button {
-      display: block;
-      margin: 20px auto;
+
+    .icon-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 16px;
+      font-size: 1em;
+      border: 2px solid #ff5931;
+      border-radius: 12px;
+      background-color: white;
+      color: #ff5931;
+      cursor: pointer;
+      transition: 0.3s;
+      font-family: 'Nunito', sans-serif;
+      margin: 10px;
+    }
+
+    .icon-button:hover {
+      background-color: #ff5931;
+      color: white;
+    }
+
+    .icon-button img {
+      width: 20px;
+      height: 20px;
+    }
+
+    .lang-button {
+      margin: 10px;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-size: 1em;
+      border: 2px solid #ff5931;
+      background-color: white;
+      color: #ff5931;
+      cursor: pointer;
+    }
+
+    .lang-button:hover {
+      background-color: #ff5931;
+      color: white;
     }
   </style>
 </head>
 <body>
-  <div id="start" class="active">
-    <h1>🇵🇱 Polish Practice App</h1>
-    <p style="text-align: center;">Choose a category:</p>
+
+  <!-- Language Selection Page -->
+  <div id="langSelect" class="active">
+    <h1>🇵🇱 Polish Grammar Practice</h1>
+    <p style="text-align: center;">Choose your language:</p>
     <div style="text-align: center;">
-      <button onclick="showPage('translate')">📝 Accusative Singular</button>
-      <button onclick="showPage('past')">⏳ Past Tense</button>
+      <button class="lang-button" onclick="setLanguage('en')">English</button>
+      <button class="lang-button" onclick="setLanguage('uk')">Українська</button>
+      <button class="lang-button" onclick="setLanguage('ro')">Română</button>
     </div>
   </div>
 
+  <!-- Main Menu -->
+  <div id="start" class="page">
+    <h1>🇵🇱 Polish Practice App</h1>
+    <p style="text-align: center;" id="chooseCategoryText">Choose a category:</p>
+    <div style="text-align: center;">
+      <button class="icon-button" onclick="showPage('translate')">
+        <img src="https://img.icons8.com/ios-filled/50/000000/edit--v1.png" alt="icon">
+        <span id="btnTranslateText">Accusative Singular</span>
+      </button>
+      <button class="icon-button" onclick="showPage('past')">
+        <img src="https://img.icons8.com/ios-filled/50/000000/hourglass--v1.png" alt="icon">
+        <span id="btnPastText">Past Tense</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Accusative Page -->
   <div id="translate" class="page">
-    <h2>Progress</h2>
+    <h2 id="translateTitle">Accusative Singular</h2>
     <div class="progress-container">
       <div class="progress-bar" id="progressTranslate"></div>
     </div>
@@ -107,19 +169,20 @@
         <input type="text" id="q2"><button onclick="check(2, 'Translate')">Check</button>
         <div id="f2" class="feedback"></div>
       </div>
-    <div class="question">
+      <div class="question">
         <p>3. “Do you know Anna?”</p>
         <input type="text" id="q3"><button onclick="check(3, 'Translate')">Check</button>
         <div id="f3" class="feedback"></div>
       </div>
     </div>
     <div style="text-align:center">
-      <button onclick="showPage('start')">← Back</button>
+      <button class="lang-button" onclick="showPage('start')">← Back</button>
     </div>
   </div>
 
+  <!-- Past Tense Page -->
   <div id="past" class="page">
-    <h2>Past Tense</h2>
+    <h2 id="pastTitle">Past Tense</h2>
     <div class="progress-container">
       <div class="progress-bar" id="progressPast"></div>
     </div>
@@ -141,7 +204,7 @@
       </div>
     </div>
     <div style="text-align:center">
-      <button onclick="showPage('start')">← Back</button>
+      <button class="lang-button" onclick="showPage('start')">← Back</button>
     </div>
   </div>
 
@@ -149,7 +212,7 @@
     const correctAnswers = {
       1: ["jem jabłko", "ja jem jabłko"],
       2: ["on bardzo lubi polski", "on bardzo lubi język polski", "on naprawdę lubi polski", "on naprawdę lubi język polski"],
-      3: ["Czy znasz Annę?", "Czy ty znasz Annę?", "Znasz Annę?", "Czy wy znacie Annę?", "Czy znacie Annę?"],      
+      3: ["czy znasz annę?", "czy ty znasz annę?", "znasz annę?", "czy wy znacie annę?", "czy znacie annę?"],
       4: ["czytałem", "przeczytałem"],
       5: ["piłaś", "wypiłaś"],
       6: ["miało"]
@@ -196,8 +259,32 @@
     }
 
     function showPage(id) {
-      document.querySelectorAll('.page, #start').forEach(p => p.classList.remove('active'));
+      document.querySelectorAll('.page, #langSelect, #start').forEach(p => p.classList.remove('active'));
       document.getElementById(id).classList.add('active');
+    }
+
+    function setLanguage(lang) {
+      const translations = {
+        en: {
+          chooseCategory: "Choose a category:",
+          btnTranslate: "Accusative Singular",
+          btnPast: "Past Tense"
+        },
+        uk: {
+          chooseCategory: "Оберіть категорію:",
+          btnTranslate: "Знахідний однини",
+          btnPast: "Минулий час"
+        },
+        ro: {
+          chooseCategory: "Alege o categorie:",
+          btnTranslate: "Acuzativ singular",
+          btnPast: "Timpul trecut"
+        }
+      };
+      document.getElementById("chooseCategoryText").textContent = translations[lang].chooseCategory;
+      document.getElementById("btnTranslateText").textContent = translations[lang].btnTranslate;
+      document.getElementById("btnPastText").textContent = translations[lang].btnPast;
+      showPage("start");
     }
   </script>
 </body>
