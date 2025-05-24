@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Polish Grammar Practice</title>
+  <title>Gramatyka języka polskiego</title>
   <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet" />
   <style>
     body {
@@ -66,7 +66,7 @@
     }
 
     .progress-bar {
-      background: linear-gradient(to right, #ff8264, #ff5931);
+      background: linear-gradient(to right, #ffab97, #ff5931);
       height: 100%;
       width: 0%;
       transition: 0.5s;
@@ -126,8 +126,8 @@
 <body>
   <!-- Language Selection Page -->
   <div id="langSelect" class="active">
-    <h1>🇵🇱 Polish Grammar Practice</h1>
-    <p style="text-align: center;">Choose your language:</p>
+    <h1>🇵🇱 Gramatyka języka polskiego</h1>
+    <p style="text-align: center;">Wybierz swój język:</p>
     <div style="text-align: center;">
       <button class="lang-button" onclick="setLanguage('en')">English</button>
       <button class="lang-button" onclick="setLanguage('uk')">Українська</button>
@@ -138,6 +138,10 @@
   <!-- Main Menu -->
   <div id="start" class="page">
     <div style="text-align: center;">
+        <button class="icon-button" onclick="showPage('adjective')">
+        <img src="https://img.icons8.com/ios-filled/50/000000/edit--v1.png" alt="icon" />
+        <span id="btnAdjectiveText">Adjectives in Singular</span>
+      </button>
       <button class="icon-button" onclick="showPage('translate')">
         <img src="https://img.icons8.com/ios-filled/50/000000/edit--v1.png" alt="icon" />
         <span id="btnTranslateText">Accusative Singular</span>
@@ -149,6 +153,37 @@
     </div>
   </div>
 
+  <!-- Adjective Page -->
+  <div id="adjective" class="page">
+    <h2 id="adjectiveTitle">Adjectives</h2>
+    <div class="progress-container">
+      <div class="progress-bar" id="progressAdjective"></div>
+    </div>
+    <div class="card">
+      <div class="question">
+        <p id="tq1">1. “a small house”</p>
+        <input type="text" id="q1" />
+        <button onclick="check(1, 'Adjective')">Check</button>
+        <div id="f1" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p id="tq2">2. “an interesting book”</p>
+        <input type="text" id="q2" />
+        <button onclick="check(2, 'Adjective')">Check</button>
+        <div id="f2" class="feedback"></div>
+      </div>
+      <div class="question">
+        <p id="tq3">3. “a big museum”</p>
+        <input type="text" id="q3" />
+        <button onclick="check(3, 'Adjective')">Check</button>
+        <div id="f3" class="feedback"></div>
+      </div>
+    </div>
+    <div style="text-align: center;">
+      <button class="lang-button" onclick="showPage('start')">← Back</button>
+    </div>
+  </div>
+
   <!-- Accusative Page -->
   <div id="translate" class="page">
     <h2 id="translateTitle">Accusative Singular</h2>
@@ -157,22 +192,22 @@
     </div>
     <div class="card">
       <div class="question">
-        <p id="tq1">1. “I am eating an apple”</p>
-        <input type="text" id="q1" />
-        <button onclick="check(1, 'Translate')">Check</button>
-        <div id="f1" class="feedback"></div>
+        <p id="tq4">4. “I am eating an apple”</p>
+        <input type="text" id="q4" />
+        <button onclick="check(4, 'Translate')">Check</button>
+        <div id="f4" class="feedback"></div>
       </div>
       <div class="question">
-        <p id="tq2">2. “He really likes Polish”</p>
-        <input type="text" id="q2" />
-        <button onclick="check(2, 'Translate')">Check</button>
-        <div id="f2" class="feedback"></div>
+        <p id="tq5">5. “He really likes Polish”</p>
+        <input type="text" id="q5" />
+        <button onclick="check(5, 'Translate')">Check</button>
+        <div id="f5" class="feedback"></div>
       </div>
       <div class="question">
-        <p id="tq3">3. “Do you know Anna?”</p>
-        <input type="text" id="q3" />
-        <button onclick="check(3, 'Translate')">Check</button>
-        <div id="f3" class="feedback"></div>
+        <p id="tq6">6. “Do you know Anna?”</p>
+        <input type="text" id="q6" />
+        <button onclick="check(6, 'Translate')">Check</button>
+        <div id="f6" class="feedback"></div>
       </div>
     </div>
     <div style="text-align: center;">
@@ -188,22 +223,22 @@
     </div>
     <div class="card">
       <div class="question">
-        <p>1. Masculine past tense of <strong>czytać</strong> (I):</p>
-        <input type="text" id="q4" />
-        <button onclick="check(4, 'Past')">Check</button>
-        <div id="f4" class="feedback"></div>
+        <p>1. (ja mężczyzna) <strong>czytać</strong>:</p>
+        <input type="text" id="q7" />
+        <button onclick="check(7, 'Past')">Check</button>
+        <div id="f7" class="feedback"></div>
       </div>
       <div class="question">
-        <p>2. Feminine past tense of <strong>pić</strong> (You, singular):</p>
-        <input type="text" id="q5" />
-        <button onclick="check(5, 'Past')">Check</button>
-        <div id="f5" class="feedback"></div>
+        <p>2. (ty kobieta) <strong>pić</strong>:</p>
+        <input type="text" id="q8" />
+        <button onclick="check(8, 'Past')">Check</button>
+        <div id="f8" class="feedback"></div>
       </div>
       <div class="question">
         <p>3. Neuter past tense of <strong>mieć</strong> (It):</p>
-        <input type="text" id="q6" />
-        <button onclick="check(6, 'Past')">Check</button>
-        <div id="f6" class="feedback"></div>
+        <input type="text" id="q9" />
+        <button onclick="check(9, 'Past')">Check</button>
+        <div id="f9" class="feedback"></div>
       </div>
     </div>
     <div style="text-align: center;">
@@ -213,16 +248,19 @@
 
   <script>
     const correctAnswers = {
-      1: ["jem jabłko", "ja jem jabłko"],
-      2: ["on bardzo lubi polski", "on bardzo lubi język polski", "on naprawdę lubi polski", "on naprawdę lubi język polski"],
-      3: ["czy znasz annę?", "czy ty znasz annę?", "znasz annę?", "czy wy znacie annę?", "czy znacie annę?"],
-      4: ["czytałem", "przeczytałem"],
-      5: ["piłaś", "wypiłaś"],
-      6: ["miało"]
+      1: ["mały dom"],
+      2: ["ciekawa książka", "interesująca książka"],
+      3: ["duże muzeum", "wielkie muzeum"],
+      4: ["jem jabłko", "ja jem jabłko"],
+      5: ["on bardzo lubi polski", "on bardzo lubi język polski", "on naprawdę lubi polski", "on naprawdę lubi język polski"],
+      6: ["czy znasz annę?", "czy ty znasz annę?", "znasz annę?", "czy wy znacie annę?", "czy znacie annę?"],
+      7: ["czytałem"],
+      8: ["piłaś"],
+      9: ["miało"]
     };
 
-    const scores = { Translate: 0, Past: 0 };
-    const answered = { Translate: {}, Past: {} };
+    const scores = { Adjective: 0, Translate: 0, Past: 0 };
+    const answered = { Adjective: {}, Translate: {}, Past: {} };
 
     function check(num, category) {
       const input = document.getElementById("q" + num).value.trim().toLowerCase();
@@ -249,8 +287,9 @@
     }
 
     function isInCategory(id, category) {
-      if (category === 'Translate') return [1, 2, 3].includes(id);
-      if (category === 'Past') return [4, 5, 6].includes(id);
+      if (category === 'Adjective') return [1, 2, 3].includes(id);
+      if (category === 'Translate') return [4, 5, 6].includes(id);
+      if (category === 'Past') return [7, 8, 9].includes(id);
       return false;
     }
 
@@ -262,32 +301,48 @@
     function setLanguage(lang) {
       const translations = {
         en: {
+          btnAdjective: "Adjectives Singular",
           btnTranslate: "Accusative Singular",
           btnPast: "Past Tense",
-          tq1: '1. “I am eating an apple”',
-          tq2: '2. “He really likes Polish”',
-          tq3: '3. “Do you know Anna?”'
+          tq1: '1. “a small house”',
+          tq2: '2. “an interesting book”',
+          tq3: '3. “a big museum”',
+          tq4: '1. “I am eating an apple”',
+          tq5: '2. “He really likes Polish”',
+          tq6: '3. “Do you know Anna?”'
         },
         uk: {
-          btnTranslate: "Знахідний однини",
+          btnAdjective: "Прикметники в однині",
+          btnTranslate: "Знахідний в однині",
           btnPast: "Минулий час",
-          tq1: '1. «Я їм яблуко»',
-          tq2: '2. «Він дуже любить польську»',
-          tq3: '3. «Ти знаєш Анну?»'
+          tq1: '1. «малий дім»',
+          tq2: '2. «цікава книжка»',
+          tq3: '3. «великий музей»',
+          tq4: '1. «Я їм яблуко»',
+          tq5: '2. «Він дуже любить польську»',
+          tq6: '3. «Ти знаєш Анну?»'
         },
         ro: {
+          btnAdjective: "Adjective la singular",
           btnTranslate: "Acuzativ singular",
           btnPast: "Timpul trecut",
-          tq1: '1. „Mănânc un măr”',
-          tq2: '2. „Lui îi place foarte mult poloneza”',
-          tq3: '3. „O cunoști pe Anna?”'
+          tq1: '1. „o casă mică”',
+          tq2: '2. „o carte interesantă”',
+          tq3: '3. „un muzeu mare”',
+          tq4: '1. „Mănânc un măr”',
+          tq5: '2. „Lui îi place foarte mult poloneza”',
+          tq6: '3. „O cunoști pe Anna?”'
         }
       };
+      document.getElementById("btnAdjectiveText").textContent = translations[lang].btnAdjective;
       document.getElementById("btnTranslateText").textContent = translations[lang].btnTranslate;
       document.getElementById("btnPastText").textContent = translations[lang].btnPast;
       document.getElementById("tq1").textContent = translations[lang].tq1;
       document.getElementById("tq2").textContent = translations[lang].tq2;
       document.getElementById("tq3").textContent = translations[lang].tq3;
+      document.getElementById("tq4").textContent = translations[lang].tq4;
+      document.getElementById("tq5").textContent = translations[lang].tq5;
+      document.getElementById("tq6").textContent = translations[lang].tq6;
       showPage("start");
     }
   </script>
